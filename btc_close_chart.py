@@ -49,11 +49,21 @@ def draw_line(x_data, y_data, title, y_legend):
 	line_chart.render_to_file(title+ '.svg')
 	return line_chart
 
+idx_month = dates.index('2017-12-01')
+line_chart_month = draw_line(months[:idx_month],close[:idx_month], '收盘价月日均价','月日均值')
+line_chart_month
+
+idx_week = dates.index('2017-12-11')
+line_chart_week = draw_line(weeks[1:idx_week],close[1:idx_week], '收盘价周日均价','周日均值')
 
 
 
 
-
+with open('Dashboard.html','w') as html_file:
+	html_file.write('<html><head><title>Dashboard</title></head><body>\n')
+	for svg in ['收盘价折线图(¥).svg','收盘价对数折线图(¥).svg','收盘价月日均价.svg','收盘价周日均价.svg']:
+		html_file.write(' <object type="image/svg+xml" data = "{0}"" height= 500></object>\n'.format(svg))
+		html_file.write('</body></html>')
 
 
 
